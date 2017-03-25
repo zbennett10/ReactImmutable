@@ -1,5 +1,10 @@
+const webpack = require('webpack');
+
 module.exports = {
   entry: [
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack/hot/only-dev-server',
+    'react-hot-loader/patch',
     './src/index.js'
   ],
   output: {
@@ -7,6 +12,9 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     loaders: [{
       exclude: /node_modules/,
@@ -17,7 +25,7 @@ module.exports = {
     }]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   devServer: {
     historyApiFallback: true,
